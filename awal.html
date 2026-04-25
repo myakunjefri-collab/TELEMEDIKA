@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - Konsultasi Dokter</title>
+    <style>
+        /* reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
+        body { background-color: #f8fbfb; width: 100%; height: 100vh; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+
+        /* navigasi atas (hanya logo) */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 5%; background: transparent; position: relative; z-index: 10; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; color: #105f68; letter-spacing: 1px; }
+        .logo-box { width: 24px; height: 12px; background: #63c1bb; border-radius: 20px 20px 0 0; }
+
+        /* area utama */
+        .main-content { flex: 1; display: flex; position: relative; z-index: 5; padding: 0 5%; }
+
+        /* area kiri (teks) */
+        .content-left { width: 45%; display: flex; flex-direction: column; justify-content: center; padding-right: 5%; }
+        h1 { color: #105f68; font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1.5px; }
+        h1 span { color: #63c1bb; display: block; }
+        .desc { color: #3a9295; font-size: 1rem; line-height: 1.7; margin-bottom: 40px; max-width: 90%; }
+        
+        /* grup tombol */
+        .btn-group { display: flex; gap: 15px; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 35px; border-radius: 40px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: 0.3s; min-width: 140px; }
+        
+        /* tombol login */
+        .btn-login { background: #105f68; color: white; box-shadow: 0 10px 20px rgba(16, 95, 104, 0.2); }
+        .btn-login:hover { background: #3a9295; transform: translateY(-3px); }
+        
+        /* tombol registrasi */
+        .btn-reg { background: transparent; color: #105f68; border: 2px solid #105f68; }
+        .btn-reg:hover { background: #105f68; color: white; transform: translateY(-3px); }
+
+        /* area kanan (visual overlapping) */
+        .content-right { width: 55%; position: relative; display: flex; align-items: center; justify-content: center; }
+        
+        /* bingkai latar belakang */
+        .visual-backdrop { position: absolute; width: 75%; height: 75%; background: #c8e6e2; border-radius: 24px; right: 0; top: 10%; z-index: 1; }
+        
+        /* gambar utama melayang (Gedung RS) */
+        .main-image { position: relative; width: 85%; height: 60%; z-index: 2; object-fit: cover; border-radius: 20px; box-shadow: -15px 20px 40px rgba(16, 95, 104, 0.15); transform: translateX(-40px); }
+
+        /* deretan kartu bawah */
+        .services-row { position: absolute; bottom: 40px; right: 5%; display: flex; gap: 20px; z-index: 10; justify-content: flex-end; width: 60%; }
+        
+        /* styling kartu layanan */
+        .service-card { background: white; padding: 20px; border-radius: 16px; width: 140px; box-shadow: 0 15px 30px rgba(16, 95, 104, 0.08); transition: 0.3s; cursor: pointer; text-align: center; }
+        .service-card:hover { transform: translateY(-10px); }
+        .service-card img { width: 60px; height: 60px; border-radius: 50%; margin-bottom: 10px; object-fit: cover; }
+        .service-card h4 { color: #105f68; font-size: 0.85rem; font-weight: 700; }
+        .service-card p { color: #63c1bb; font-size: 0.7rem; font-weight: 600; margin-top: 5px; }
+
+        /* sosmed kiri bawah */
+        .social-links { position: absolute; bottom: 40px; left: 5%; display: flex; gap: 15px; z-index: 10; }
+        .social-links span { width: 8px; height: 8px; background: #9ed5d1; border-radius: 50%; display: inline-block; cursor: pointer; transition: 0.3s; }
+        .social-links span:hover { background: #105f68; transform: scale(1.5); }
+
+        /* responsif hp */
+        @media (max-width: 900px) {
+            body { overflow-y: auto; height: auto; }
+            .main-content { flex-direction: column; padding: 40px 5%; }
+            .content-left { width: 100%; text-align: center; align-items: center; padding-right: 0; margin-bottom: 50px; }
+            h1 { font-size: 3rem; }
+            .content-right { width: 100%; height: 400px; }
+            .visual-backdrop { width: 90%; height: 90%; top: 5%; right: 5%; }
+            .main-image { width: 90%; height: 80%; transform: translateX(0); }
+            .services-row { position: relative; bottom: 0; right: 0; width: 100%; justify-content: center; flex-wrap: wrap; margin-top: 30px; padding-bottom: 40px; }
+            .social-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <div class="logo-box"></div>
+            KLINIK UTAMA
+        </div>
+    </nav>
+
+    <div class="main-content">
+        
+        <div class="content-left">
+            <h1>Solusi Sehat<br><span>Tanpa Antre.</span></h1>
+            <p class="desc">
+                Konsultasi medis kini lebih mudah. Hubungi dokter spesialis berpengalaman secara online dengan layanan aman dan terpercaya bagi Anda dan keluarga.
+            </p>
+            
+            <div class="btn-group">
+                <a href="login.php" class="btn btn-login">Login</a>
+                <a href="register.php" class="btn btn-reg">Registrasi</a>
+            </div>
+        </div>
+
+        <div class="content-right">
+            <div class="visual-backdrop"></div>
+            <img src="https://ppkn.fkip.uns.ac.id/wp-content/uploads/2022/08/RS_UNS.jpeg" alt="Rumah Sakit UNS" class="main-image">
+        </div>
+
+    </div>
+
+    <div class="services-row">
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=200" alt="Poli Umum">
+            <h4>Poli Umum</h4>
+            <p>Tersedia</p>
+        </div>
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=200" alt="Poli Gigi">
+            <h4>Poli Gigi</h4>
+            <p>Tersedia</p>
+        </div>
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=200" alt="Poli Anak">
+            <h4>Poli Anak</h4>
+            <p>Tersedia</p>
+        </div>
+    </div>
+
+    <div class="social-links">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+</body>
+</html>
