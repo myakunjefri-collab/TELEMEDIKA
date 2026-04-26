@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require '../service/koneksi.php';
+    require 'koneksi.php';
     
     $no_rm = $_POST['no_rm'];
     $nama_pasien = $_POST['nama_pasien'];
@@ -10,7 +10,7 @@
     $query = "INSERT INTO pasien_konsultasi (no_rm, nama_pasien, keluhan, status) VALUES ('$no_rm', '$nama_pasien', '$keluhan', '$status')";
     
     if(mysqli_query($koneksi, $query)) {
-        header("Location: ../dashboardAdmin.php");
+        header("Location: /api/dashboardAdmin");
         exit();
     } else {
         echo "Gagal menambah data: " . mysqli_error($koneksi);

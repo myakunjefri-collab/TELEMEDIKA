@@ -1,15 +1,10 @@
 {
   "functions": {
-    "api/**/*.php": {
+    "api/*.php": {
       "runtime": "vercel-php@0.7.1"
     }
   },
-  "routes": [
-    { "src": "/", "dest": "/awal.html" },
-    { "src": "/login.php", "dest": "/api/service/login.php" },
-    { "src": "/prosesLogin.php", "dest": "/api/Proses/prosesLogin.php" },
-    { "src": "/index.php", "dest": "/api/service/index.php" },
-    { "src": "/beranda.php", "dest": "/api/service/beranda.php" },
-    { "src": "/register.php", "dest": "/api/service/register.php" }
+  "rewrites": [
+    { "source": "/", "destination": "/awal.html" }
   ]
 }

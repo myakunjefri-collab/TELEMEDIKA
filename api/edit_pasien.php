@@ -1,16 +1,16 @@
 <?php
 session_start();
-require './service/koneksi.php';
+require 'koneksi.php';
 
 // Proteksi Admin
 if (!isset($_SESSION['id']) || $_SESSION['role'] != 'admin') {
-    header("Location: login.php");
+    header("Location: /api/login");
     exit();
 }
 
 // Menangkap 'id' dari parameter URL
 if (!isset($_GET['id'])) {
-    header("Location: dashboardAdmin.php");
+    header("Location: /api/dashboardAdmin");
     exit();
 }
 
@@ -30,7 +30,7 @@ if (!$data) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Data Pasien - Telemedicine</title>
-    <link rel="stylesheet" href="assets/css/auth.css"> <style>
+    <link rel="stylesheet" href="/auth.css"> <style>
         .auth-card { max-width: 500px; border-top: 5px solid #007bff; }
         .form-group label { font-weight: bold; color: #333; margin-bottom: 5px; display: block; }
         textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
@@ -44,7 +44,7 @@ if (!$data) {
         <p style="color: #666; font-size: 0.9rem;">Kelola detail medis pasien di bawah ini.</p>
         <hr>
         
-        <form action="proses/prosesEditPasien.php" method="POST">
+        <form action="/api/prosesEditPasien" method="POST">
             <input type="hidden" name="id" value="<?= $data['id']; ?>">
             
             <div class="form-group">
@@ -76,7 +76,7 @@ if (!$data) {
         
         <div class="auth-footer">
             <br>
-            <a href="dashboardAdmin.php" style="color: #007bff; text-decoration: none;">&larr; Kembali ke Panel Admin</a>
+            <a href="/api/dashboardAdmin" style="color: #007bff; text-decoration: none;">&larr; Kembali ke Panel Admin</a>
         </div>
     </div>
 </body>

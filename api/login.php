@@ -80,7 +80,7 @@
                 <?php unset($_SESSION['success']); ?>
             <?php endif; ?>
 
-            <form action="prosesLogin.php" method="POST">
+            <form action="/api/prosesLogin" method="POST">
                 <div class="form-group">
                     <label>Username</label>
                     <input type="text" name="username" placeholder="Masukkan username" required>
@@ -101,7 +101,7 @@
             </form>
 
             <div class="footer">
-                Belum punya akun? <a href="register.php">Daftar Sekarang</a>
+                Belum punya akun? <a href="/api/register">Daftar Sekarang</a>
             </div>
         </div>
     </div>

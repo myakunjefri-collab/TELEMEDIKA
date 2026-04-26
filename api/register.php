@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Konsultasi Dokter Online</title>
-    <link rel="stylesheet" href="assets/css/auth.css"> 
+    <link rel="stylesheet" href="/auth.css"> 
     <style>
         /* reset & font */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
@@ -71,7 +71,7 @@
                 <?php unset($_SESSION['error']); ?>
             <?php endif; ?>
 
-            <form action="proses/prosesRegister.php" method="POST" onsubmit="return validateForm()">
+            <form action="/api/prosesRegister" method="POST" onsubmit="return validateForm()">
                 <div class="form-group">
                     <label>Username</label>
                     <input type="text" name="username" id="username" placeholder="Masukkan username" required>
@@ -88,11 +88,11 @@
             </form>
 
             <div class="footer">
-                Sudah punya akun? <a href="login.php">Login di sini</a>
+                Sudah punya akun? <a href="/api/login">Login di sini</a>
             </div>
         </div>
     </div>
     
-    <script src="assets/js/script.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>

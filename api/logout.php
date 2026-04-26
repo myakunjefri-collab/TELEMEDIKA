@@ -3,6 +3,6 @@
     session_destroy();
     setcookie('username', '', time() - 3600, "/");
 
-    header("Location: ../awal.php");
+    header("Location: /awal.html");
     exit();
 ?>

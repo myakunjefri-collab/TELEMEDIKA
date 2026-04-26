@@ -65,8 +65,7 @@ function initDarkMode() {
 }
 
 function initLogoutModal() {
-    // Diperbaiki untuk mendeteksi link logout.php di halaman mana pun
-    const navLogoutBtn = document.querySelector('a[href="logout.php"], a[href="proses/logout.php"]'); 
+    const navLogoutBtn = document.querySelector('a[href="/api/logout"]'); 
     const modalOverlay = document.getElementById('logout-modal');
     const btnCancel = document.getElementById('btn-cancel');
 
@@ -107,7 +106,6 @@ function validateForm() {
     const inputEmail = document.getElementById('email');
     const inputPassword = document.getElementById('password');
 
-    // 1. Validasi Username (Ada di Login dan Register)
     if (inputUsername) {
         if (inputUsername.value.trim() === "") {
             alert("⚠️ Username tidak boleh kosong!");
@@ -121,7 +119,6 @@ function validateForm() {
         }
     }
 
-    // 2. Validasi Email (Hanya berjalan di Register)
     if (inputEmail) {
         const emailValue = inputEmail.value.trim();
         if (emailValue === "") {
@@ -136,7 +133,6 @@ function validateForm() {
         }
     }
 
-    // 3. Validasi Password
     if (inputPassword) {
         if (inputPassword.value.trim() === "") {
             alert("⚠️ Password tidak boleh kosong!");
@@ -144,7 +140,6 @@ function validateForm() {
             return false;
         }
         
-        // Cek minimal karakter khusus di form Register (yang memiliki input email)
         if (inputEmail && inputPassword.value.length < 6) { 
             alert("⚠️ Demi keamanan, password minimal harus 6 karakter!");
             inputPassword.focus();

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require '../service/koneksi.php';
+    require 'koneksi.php';
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -20,19 +20,19 @@
             
             // Arahkan berdasarkan role
             if ($user['role'] == 'admin') {
-                header("Location: /dashboardAdmin.php");
+                header("Location: /api/dashboardAdmin");
             } else {
-                header("Location: /index.php");
+                header("Location: /api/index");
             }
             exit();
         } else {
             $_SESSION['error'] = "Password yang Anda masukkan salah!";
-            header("Location: /login.php");
+            header("Location: /api/login");
             exit();
         }
     } else {
         $_SESSION['error'] = "Username tidak terdaftar di sistem kami.";
-        header("Location: /login.php");
+        header("Location: /api/login");
         exit();
     }
 ?>

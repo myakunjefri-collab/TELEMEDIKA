@@ -1,10 +1,10 @@
 <?php
 session_start();
-require './service/koneksi.php';
+require 'koneksi.php';
 
 // Validasi Admin
 if (!isset($_SESSION['id']) || $_SESSION['role'] != 'admin') {
-    header("Location: login.php"); 
+    header("Location: /api/login"); 
     exit();
 }
 
@@ -70,7 +70,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM pasien_konsultasi ORDER BY id DES
 
     <nav class="top-navbar">
         <div class="logo"><div class="logo-box"></div> TeleMedika Admin</div>
-        <a href="logout.php" class="btn-logout">Logout</a>
+        <a href="/api/logout" class="btn-logout">Logout</a>
     </nav>
 
     <main class="main-wrapper">
@@ -84,7 +84,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM pasien_konsultasi ORDER BY id DES
         <div class="table-card">
             <div class="card-header">
                 <h4 class="form-title">Manajemen Antrean Pasien</h4>
-                <a href="tambah_pasien.php" class="btn-add">+ Input Pasien Baru</a>
+                <a href="/api/tambah_pasien" class="btn-add">+ Input Pasien Baru</a>
             </div>
             
             <div style="overflow-x: auto;">
@@ -117,8 +117,8 @@ $query = mysqli_query($koneksi, "SELECT * FROM pasien_konsultasi ORDER BY id DES
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <a href="edit_pasien.php?id=<?= $row['id']; ?>" class="btn-edit">Edit</a>
-                                    <a href="proses/prosesHapus.php?id=<?= $row['id']; ?>" class="btn-delete" onclick="return confirm('Hapus data pasien <?= htmlspecialchars($row['nama_pasien']); ?>?')">Hapus</a>
+                                    <a href="/api/edit_pasien?id=<?= $row['id']; ?>" class="btn-edit">Edit</a>
+                                    <a href="/api/prosesHapus?id=<?= $row['id']; ?>" class="btn-delete" onclick="return confirm('Hapus data pasien <?= htmlspecialchars($row['nama_pasien']); ?>?')">Hapus</a>
                                 </td>
                             </tr>
                             <?php endwhile; ?>

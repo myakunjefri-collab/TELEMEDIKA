@@ -3,7 +3,7 @@ session_start();
 
 /* cek admin */
 if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
-    header("Location: dashboardAdmin.php");
+    header("Location: /api/dashboardAdmin");
     exit();
 }
 ?>
@@ -106,8 +106,8 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
             <div class="logo-box"></div> TeleMedika
         </div>
         <div class="nav-actions">
-            <a href="beranda.php" class="btn-nav btn-dash">Dashboard</a>
-            <a href="Proses/logout.php" class="btn-nav" style="background: #fff0f0; color: #d9534f; border: 1px solid #fadcd9; margin-left: 10px; font-weight:700; text-decoration:none;">Logout</a>
+            <a href="/api/beranda" class="btn-nav btn-dash">Dashboard</a>
+            <a href="/api/logout" class="btn-nav" style="background: #fff0f0; color: #d9534f; border: 1px solid #fadcd9; margin-left: 10px; font-weight:700; text-decoration:none;">Logout</a>
         </div>
     </nav>
 
@@ -117,7 +117,7 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
             <div class="hero-text">
                 <h1>Konsultasi Kesehatan <span>Kapan Saja.</span></h1>
                 <p>Dapatkan diagnosis, resep obat digital, dan panduan medis langsung dari dokter spesialis melalui chat atau video call.</p>
-                <a href="beranda.php" class="btn-nav btn-login" style="display:inline-block; padding:15px 30px;">Mulai Konsultasi &rarr;</a>
+                <a href="/api/beranda" class="btn-nav btn-login" style="display:inline-block; padding:15px 30px;">Mulai Konsultasi &rarr;</a>
             </div>
             <div class="hero-img-wrap">
                 <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600" class="hero-img" alt="Dokter Online">
@@ -140,8 +140,8 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
         </div>
 
         <script>
-            // Arahkan ke file php buatan kita sendiri
-            const urlAPI = "api_bps.php"; 
+            // Arahkan ke file php di folder api
+            const urlAPI = "/api/api_bps"; 
             
             let myChart = null;
             let dataAsliBPS = [];
@@ -181,15 +181,11 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
                     let arrayData = [];
 
                     // STRATEGI MENCARI DATA:
-                    // BPS sering menyembunyikan data di dalam properti "data" lagi
                     if (json.data && Array.isArray(json.data)) {
-                        // Cari adakah elemen yang punya properti "data" berupa array
                         let objekTersembunyi = json.data.find(item => item.data && Array.isArray(item.data));
-                        
                         if (objekTersembunyi) {
-                            arrayData = objekTersembunyi.data; // Nah ketemu! Ini array provinsinya
+                            arrayData = objekTersembunyi.data;
                         } else {
-                            // Jika tidak disembunyikan
                             arrayData = json.data.filter(item => item.label && item.variables);
                         }
                     }
@@ -199,19 +195,15 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
                     // Ekstrak nama provinsi dan nilainya
                     dataAsliBPS = arrayData.map(item => {
                         let namaProv = item.label || "Tidak Diketahui";
-                        
                         if(item.variables) {
                             let kunciAcak = Object.keys(item.variables)[0];
-                            let nilaiString = item.variables[kunciAcak].value; // Format "27,12"
-                            
-                            // Wajib ubah koma jadi titik agar grafik tidak nge-blank
+                            let nilaiString = item.variables[kunciAcak].value;
                             let nilaiAngka = parseFloat(String(nilaiString).replace(',', '.'));
                             return { nama_wilayah: namaProv, nilai: nilaiAngka };
                         }
                         return { nama_wilayah: namaProv, nilai: 0 };
                     });
 
-                    // Tampilkan ke layar
                     const lbl = dataAsliBPS.map(d => d.nama_wilayah);
                     const val = dataAsliBPS.map(d => d.nilai);
 
@@ -223,15 +215,12 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
                     drawChart(["Gagal Membaca Data API BPS"], [0]);
                 });
 
-            // filter saat dropdown berubah
             document.getElementById('pilihProvinsi').addEventListener('change', function() {
                 const pilihan = this.value;
                 if (!pilihan) return;
-                
                 let dataFilter = (pilihan === 'semua') ? dataAsliBPS : dataAsliBPS.filter(d => d.nama_wilayah === pilihan);
                 const lbl = dataFilter.map(d => d.nama_wilayah);
                 const val = dataFilter.map(d => d.nilai);
-                
                 drawChart(lbl, val);
             });
         </script>
@@ -243,21 +232,21 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
                 <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=200" class="doc-img" alt="Dr Andi">
                 <h4 style="color:#105f68;">Dr. Andi Pratama</h4>
                 <p style="font-size:0.8rem; color:#3a9295;">Dokter Umum</p>
-                <a href="beranda.php" class="btn-chat">Mulai Chat</a>
+                <a href="/api/beranda" class="btn-chat">Mulai Chat</a>
             </div>
             <div class="doc-card">
                 <span class="status">• ONLINE</span>
                 <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600" class="doc-img" alt="Dr Siti">
                 <h4 style="color:#105f68;">Dr. Siti Aminah</h4>
                 <p style="font-size:0.8rem; color:#3a9295;">Dokter Umum</p>
-                <a href="beranda.php" class="btn-chat">Mulai Chat</a>
+                <a href="/api/beranda" class="btn-chat">Mulai Chat</a>
             </div>
             <div class="doc-card">
                 <span class="status">• ONLINE</span>
                 <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=200" class="doc-img" alt="Dr Budi">
                 <h4 style="color:#105f68;">Dr. Budi Santoso</h4>
                 <p style="font-size:0.8rem; color:#3a9295;">Spesialis Anak</p>
-                <a href="beranda.php" class="btn-chat">Mulai Chat</a>
+                <a href="/api/beranda" class="btn-chat">Mulai Chat</a>
             </div>
         </div>
 

@@ -71,7 +71,7 @@ if ($dok == 'siti') {
     <div class="chat-container">
         
         <div class="header">
-            <a href="index.php" class="btn-back">&lsaquo;</a>
+            <a href="/api/index" class="btn-back">&lsaquo;</a>
             <img src="<?= $img; ?>" class="header-img" alt="Foto">
             <div class="header-info">
                 <h3><?= $nama; ?></h3>

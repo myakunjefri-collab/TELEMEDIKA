@@ -1,9 +1,9 @@
 <?php
 session_start();
-require './service/koneksi.php';
+require 'koneksi.php';
 
 if (!isset($_SESSION['id']) || $_SESSION['role'] != 'user') {
-    header("Location: login.php"); 
+    header("Location: /api/login"); 
     exit();
 }
 
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['keluhan'])) {
     $insert_query = "INSERT INTO pasien_konsultasi (no_rm, nama_pasien, keluhan, status) VALUES ('$no_rm', '$username_sekarang', '$keluhan', '$status')";
     mysqli_query($koneksi, $insert_query);
     
-    header("Location: beranda.php");
+    header("Location: /api/beranda");
     exit();
 }
 
@@ -73,7 +73,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM pasien_konsultasi WHERE nama_pasi
 
     <nav class="top-navbar">
         <div class="logo"><div class="logo-box"></div> TeleMedika</div>
-        <a href="index.php" class="btn-home">Halaman Utama</a>
+        <a href="/api/index" class="btn-home">Halaman Utama</a>
     </nav>
 
     <main class="main-wrapper">
@@ -135,7 +135,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM pasien_konsultasi WHERE nama_pasi
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <a href="chat.php?dok=<?= $d_slug; ?>" class="btn-chat-now">Chat Dokter</a>
+                                        <a href="/api/chat?dok=<?= $d_slug; ?>" class="btn-chat-now">Chat Dokter</a>
                                     </td>
                                 </tr>
                                 <?php endwhile; ?>

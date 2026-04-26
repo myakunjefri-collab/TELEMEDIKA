@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require '../service/koneksi.php';
+    require 'koneksi.php';
 
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -14,11 +14,11 @@
 
     if ($result){
         $_SESSION['success'] = "Pendaftaran berhasil! Silakan login untuk melanjutkan.";
-        header("Location: ../login.php");
+        header("Location: /api/login");
         exit();
     } else {
         $_SESSION['error'] = "Mohon maaf, pendaftaran gagal: " . mysqli_error($koneksi);
-        header("Location: ../register.php");
+        header("Location: /api/register");
         exit();
     }
 ?>

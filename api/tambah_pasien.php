@@ -1,9 +1,9 @@
 <?php
 session_start();
-require './service/koneksi.php';
+require 'koneksi.php';
 
 if (!isset($_SESSION['id']) || $_SESSION['role'] != 'admin') {
-    header("Location: login.php");
+    header("Location: /api/login");
     exit();
 }
 ?>
@@ -83,7 +83,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] != 'admin') {
             <h2 class="form-title">Input Pasien Baru</h2>
             <p class="form-desc">Silakan isi data medis pasien ke dalam sistem antrean.</p>
             
-            <form action="proses/prosesTambahPasien.php" method="POST">
+            <form action="/api/prosesTambahPasien" method="POST">
                 <div class="form-group">
                     <label>Nomor RM (Rekam Medis)</label>
                     <input type="text" name="no_rm" id="no_rm" placeholder="Contoh: RM-2026-001" required>
@@ -102,7 +102,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] != 'admin') {
                 <button type="submit" class="btn-submit">Simpan Data & Daftarkan</button>
             </form>
             
-            <a href="dashboardAdmin.php" class="btn-cancel">Batal & Kembali</a>
+            <a href="/api/dashboardAdmin" class="btn-cancel">Batal & Kembali</a>
         </div>
     </div>
 
