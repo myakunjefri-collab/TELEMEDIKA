@@ -5,10 +5,9 @@
     }
   },
   "rewrites": [
+    { "source": "/", "destination": "/awal.html" },
     { "source": "/login.php", "destination": "/api/service/login.php" },
-    { "source": "/prosesLogin.php", "destination": "/api/Proses/prosesLogin.php" },
     { "source": "/beranda.php", "destination": "/api/service/beranda.php" },
-    { "source": "/koneksi.php", "destination": "/api/service/koneksi.php" }
-  ],
-  "cleanUrls": true
+    { "source": "/prosesLogin.php", "destination": "/api/Proses/prosesLogin.php" }
+  ]
 }
