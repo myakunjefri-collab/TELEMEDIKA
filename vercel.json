@@ -4,11 +4,11 @@
       "runtime": "vercel-php@0.7.1"
     }
   },
-  "routes": [
-    { "src": "/", "dest": "/awal.html" },
-    { "src": "/login.php", "dest": "/api/service/login.php" },
-    { "src": "/beranda.php", "dest": "/api/service/beranda.php" },
-    { "src": "/prosesLogin.php", "dest": "/api/Proses/prosesLogin.php" },
-    { "src": "/api/(.*)", "dest": "/api/$1" }
-  ]
+  "rewrites": [
+    { "source": "/login.php", "destination": "/api/service/login.php" },
+    { "source": "/prosesLogin.php", "destination": "/api/Proses/prosesLogin.php" },
+    { "source": "/beranda.php", "destination": "/api/service/beranda.php" },
+    { "source": "/koneksi.php", "destination": "/api/service/koneksi.php" }
+  ],
+  "cleanUrls": true
 }
