@@ -1,14 +1,12 @@
 <?php
-session_start();
 require 'koneksi.php';
 
-// Validasi Admin
-if (!isset($_SESSION['id']) || $_SESSION['role'] != 'admin') {
+// Validasi Admin menggunakan Cookie
+if (!isset($_COOKIE['user_id']) || $_COOKIE['role'] != 'admin') {
     header("Location: /api/login"); 
     exit();
 }
 
-// Diurutkan dari yang terbaru (opsional)
 $query = mysqli_query($koneksi, "SELECT * FROM pasien_konsultasi ORDER BY id DESC");
 ?>
 <!DOCTYPE html>

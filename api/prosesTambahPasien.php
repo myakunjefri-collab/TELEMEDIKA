@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require 'koneksi.php';
     
     $no_rm = $_POST['no_rm'];

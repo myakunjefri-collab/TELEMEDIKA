@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require 'koneksi.php';
 
     $username = $_POST['username'];
@@ -13,12 +12,10 @@
     $result = mysqli_query($koneksi, $query);
 
     if ($result){
-        $_SESSION['success'] = "Pendaftaran berhasil! Silakan login untuk melanjutkan.";
-        header("Location: /api/login");
+        header("Location: /api/login?pesan=sukses");
         exit();
     } else {
-        $_SESSION['error'] = "Mohon maaf, pendaftaran gagal: " . mysqli_error($koneksi);
-        header("Location: /api/register");
+        header("Location: /api/register?error=gagal");
         exit();
     }
 ?>

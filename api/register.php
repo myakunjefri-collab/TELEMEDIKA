@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -66,9 +65,8 @@
             <h2>Buat Akun Baru</h2>
             <p class="subtitle">Silakan isi data diri Anda untuk mendaftar</p>
 
-            <?php if(isset($_SESSION['error'])) : ?>
-                <div class="alert alert-error"><?= $_SESSION['error']; ?></div>
-                <?php unset($_SESSION['error']); ?>
+            <?php if(isset($_GET['error'])) : ?>
+                <div class="alert alert-error">Mohon maaf, pendaftaran gagal. Username/Email mungkin sudah dipakai.</div>
             <?php endif; ?>
 
             <form action="/api/prosesRegister" method="POST" onsubmit="return validateForm()">

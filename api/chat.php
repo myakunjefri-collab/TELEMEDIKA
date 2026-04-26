@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 /* deteksi dokter dari url */
 $dok = isset($_GET['dok']) ? $_GET['dok'] : 'andi';
 

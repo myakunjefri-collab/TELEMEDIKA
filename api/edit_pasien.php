@@ -1,9 +1,8 @@
 <?php
-session_start();
 require 'koneksi.php';
 
 // Proteksi Admin
-if (!isset($_SESSION['id']) || $_SESSION['role'] != 'admin') {
+if (!isset($_COOKIE['user_id']) || $_COOKIE['role'] != 'admin') {
     header("Location: /api/login");
     exit();
 }

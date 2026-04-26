@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require 'koneksi.php';
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -10,13 +9,10 @@
     if (mysqli_num_rows($result) === 1) {
         $user = mysqli_fetch_assoc($result);
         if (password_verify($password, $user['password'])) {
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = $user['role'];
-
-            if (isset($_POST['remember'])) {
-                setcookie("username", $username, time() + 3600, "/"); 
-            }
+            // Gunakan Cookie sebagai pengganti Session (Aktif 1 Hari)
+            setcookie("user_id", $user['id'], time() + 86400, "/");
+            setcookie("username", $username, time() + 86400, "/");
+            setcookie("role", $user['role'], time() + 86400, "/");
             
             // Arahkan berdasarkan role
             if ($user['role'] == 'admin') {
@@ -26,13 +22,11 @@
             }
             exit();
         } else {
-            $_SESSION['error'] = "Password yang Anda masukkan salah!";
-            header("Location: /api/login");
+            header("Location: /api/login?error=password");
             exit();
         }
     } else {
-        $_SESSION['error'] = "Username tidak terdaftar di sistem kami.";
-        header("Location: /api/login");
+        header("Location: /api/login?error=username");
         exit();
     }
 ?>

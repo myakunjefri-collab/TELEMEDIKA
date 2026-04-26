@@ -1,8 +1,6 @@
 <?php
-session_start();
-
-/* cek admin */
-if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
+// cek admin via Cookie
+if (isset($_COOKIE['user_id']) && $_COOKIE['role'] == 'admin') {
     header("Location: /api/dashboardAdmin");
     exit();
 }
@@ -140,7 +138,7 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
         </div>
 
         <script>
-            // Arahkan ke file php di folder api
+            // Arahkan ke file php buatan kita sendiri
             const urlAPI = "/api/api_bps"; 
             
             let myChart = null;
@@ -181,11 +179,15 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
                     let arrayData = [];
 
                     // STRATEGI MENCARI DATA:
+                    // BPS sering menyembunyikan data di dalam properti "data" lagi
                     if (json.data && Array.isArray(json.data)) {
+                        // Cari adakah elemen yang punya properti "data" berupa array
                         let objekTersembunyi = json.data.find(item => item.data && Array.isArray(item.data));
+                        
                         if (objekTersembunyi) {
-                            arrayData = objekTersembunyi.data;
+                            arrayData = objekTersembunyi.data; // Nah ketemu! Ini array provinsinya
                         } else {
+                            // Jika tidak disembunyikan
                             arrayData = json.data.filter(item => item.label && item.variables);
                         }
                     }
@@ -195,15 +197,19 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
                     // Ekstrak nama provinsi dan nilainya
                     dataAsliBPS = arrayData.map(item => {
                         let namaProv = item.label || "Tidak Diketahui";
+                        
                         if(item.variables) {
                             let kunciAcak = Object.keys(item.variables)[0];
-                            let nilaiString = item.variables[kunciAcak].value;
+                            let nilaiString = item.variables[kunciAcak].value; // Format "27,12"
+                            
+                            // Wajib ubah koma jadi titik agar grafik tidak nge-blank
                             let nilaiAngka = parseFloat(String(nilaiString).replace(',', '.'));
                             return { nama_wilayah: namaProv, nilai: nilaiAngka };
                         }
                         return { nama_wilayah: namaProv, nilai: 0 };
                     });
 
+                    // Tampilkan ke layar
                     const lbl = dataAsliBPS.map(d => d.nama_wilayah);
                     const val = dataAsliBPS.map(d => d.nilai);
 
@@ -215,12 +221,15 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'admin') {
                     drawChart(["Gagal Membaca Data API BPS"], [0]);
                 });
 
+            // filter saat dropdown berubah
             document.getElementById('pilihProvinsi').addEventListener('change', function() {
                 const pilihan = this.value;
                 if (!pilihan) return;
+                
                 let dataFilter = (pilihan === 'semua') ? dataAsliBPS : dataAsliBPS.filter(d => d.nama_wilayah === pilihan);
                 const lbl = dataFilter.map(d => d.nama_wilayah);
                 const val = dataFilter.map(d => d.nilai);
+                
                 drawChart(lbl, val);
             });
         </script>

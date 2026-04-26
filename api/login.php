@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -44,7 +43,7 @@
         .footer { text-align: center; margin-top: 30px; font-size: 0.9rem; color: #3a9295; }
         .footer a { color: #105f68; text-decoration: none; font-weight: 700; }
         
-        /* notifikasi */
+        /* notifikasi via GET */
         .alert { padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 0.85rem; text-align: center; }
         .alert-error { background: #fdeaea; color: #d9534f; border: 1px solid #f5c6cb; }
         .alert-success { background: #c8e6e2; color: #105f68; border: 1px solid #9ed5d1; }
@@ -70,14 +69,14 @@
             <h2>Portal Pasien</h2>
             <p class="subtitle">Masuk untuk mengelola janji temu Anda</p>
 
-            <?php if(isset($_SESSION['error'])) : ?>
-                <div class="alert alert-error"><?= $_SESSION['error']; ?></div>
-                <?php unset($_SESSION['error']); ?>
+            <?php if(isset($_GET['error'])) : ?>
+                <div class="alert alert-error">
+                    <?= ($_GET['error'] == 'password') ? 'Password yang Anda masukkan salah!' : 'Username tidak terdaftar di sistem kami.'; ?>
+                </div>
             <?php endif; ?>
             
-            <?php if(isset($_SESSION['success'])) : ?>
-                <div class="alert alert-success"><?= $_SESSION['success']; ?></div>
-                <?php unset($_SESSION['success']); ?>
+            <?php if(isset($_GET['pesan']) && $_GET['pesan'] == 'sukses') : ?>
+                <div class="alert alert-success">Pendaftaran berhasil! Silakan login.</div>
             <?php endif; ?>
 
             <form action="/api/prosesLogin" method="POST">

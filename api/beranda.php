@@ -1,13 +1,13 @@
 <?php
-session_start();
 require 'koneksi.php';
 
-if (!isset($_SESSION['id']) || $_SESSION['role'] != 'user') {
+// Cek menggunakan Cookie
+if (!isset($_COOKIE['user_id']) || $_COOKIE['role'] != 'user') {
     header("Location: /api/login"); 
     exit();
 }
 
-$username_sekarang = $_SESSION['username'];
+$username_sekarang = $_COOKIE['username'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['keluhan'])) {
     $keluhan = mysqli_real_escape_string($koneksi, $_POST['keluhan']);
@@ -79,7 +79,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM pasien_konsultasi WHERE nama_pasi
     <main class="main-wrapper">
         <header class="welcome-sec">
             <h2>Ringkasan Kesehatan</h2>
-            <p>Halo <b><?= $_SESSION['username']; ?></b>, pantau antrean medis Anda di sini.</p>
+            <p>Halo <b><?= htmlspecialchars($_COOKIE['username']); ?></b>, pantau antrean medis Anda di sini.</p>
         </header>
 
         <div class="dashboard-grid">
