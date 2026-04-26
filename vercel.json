@@ -1,15 +1,13 @@
 {
-  "builds": [
-    {
-      "src": "api/**/*.php",
-      "use": "vercel-php@0.7.1"
+  "functions": {
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.7.1"
     }
-  ],
+  },
   "routes": [
     { "src": "/", "dest": "/awal.html" },
     { "src": "/login.php", "dest": "/api/service/login.php" },
     { "src": "/beranda.php", "dest": "/api/service/beranda.php" },
-    { "src": "/prosesLogin.php", "dest": "/api/Proses/prosesLogin.php" },
-    { "src": "/(.*)", "dest": "/$1" }
+    { "src": "/prosesLogin.php", "dest": "/api/Proses/prosesLogin.php" }
   ]
 }
