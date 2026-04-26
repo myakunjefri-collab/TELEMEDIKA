@@ -1,12 +1,10 @@
 {
-  "functions": {
-    "api/service/*.php": {
-      "runtime": "vercel-php@0.7.1"
-    },
-    "api/Proses/*.php": {
-      "runtime": "vercel-php@0.7.1"
+  "builds": [
+    {
+      "src": "api/**/*.php",
+      "use": "vercel-php@0.7.1"
     }
-  },
+  ],
   "routes": [
     { "src": "/", "dest": "/awal.html" },
     { "src": "/login.php", "dest": "/api/service/login.php" },
