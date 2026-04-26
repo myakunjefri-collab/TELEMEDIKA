@@ -20,19 +20,19 @@
             
             // Arahkan berdasarkan role
             if ($user['role'] == 'admin') {
-                header("Location: ../dashboardAdmin.php");
+                header("Location: /dashboardAdmin.php");
             } else {
-                header("Location: ../index.php");
+                header("Location: /index.php");
             }
             exit();
         } else {
             $_SESSION['error'] = "Password yang Anda masukkan salah!";
-            header("Location: ../login.php");
+            header("Location: /login.php");
             exit();
         }
     } else {
         $_SESSION['error'] = "Username tidak terdaftar di sistem kami.";
-        header("Location: ../login.php");
+        header("Location: /login.php");
         exit();
     }
 ?>

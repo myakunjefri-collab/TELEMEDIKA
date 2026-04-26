@@ -80,7 +80,7 @@
                 <?php unset($_SESSION['success']); ?>
             <?php endif; ?>
 
-            <form action="proses/prosesLogin.php" method="POST">
+            <form action="prosesLogin.php" method="POST">
                 <div class="form-group">
                     <label>Username</label>
                     <input type="text" name="username" placeholder="Masukkan username" required>
